@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.js" integrity="sha512-vGcPDqyonHb0c11UofnOKdSAt5zYRpKI4ow+v6hat4i96b7nHSn8PQyk0sT5L9RECyksp+SztCPP6bqeeGaRKg==" crossorigin="anonymous"></script>
+    <script src="SoundCircle.js"></script>
+    <title>PulseNode</title>
+</head>
+<body>
+
+    <script src="sketch.js"></script>
+    <h1>#include < FastLED.h ><br><br>
+    #define LED_PIN  3<br>
+    #define NUM_LEDS  200<br>
+    #define BRIGHTNESS  64<br>
+    #define LED_TYPE  WS2811<br>
+    #define COLOR_ORDER GRB<br>
+    CRGB leds[NUM_LEDS];<br>
+    <br>
+    int PulsePin = A0;<br>
+    int Signal;<br>
+    int Threshold = 550;<br>
+    <br>
+    #define UPDATES_PER_SECOND 100<br>
+    <br>
+    void setup(){<br>
+        delay(3000);<br>
+        FastLED.addLeds< LED_TYPE, LED_PIN, COLOR_ORDER><br>
+        (leds, NUM_LEDS).setCorrection(TypicalLEDStrip);<br>
+        FastLED.setBrightness(BRIGHTNESS);<br>
+    }<br>
+    <br>
+    void loop(){<br>
+        Signal = analogRead(PulsePin);<br>
+        Serial.println(Signal);<br>
+        if (Signal > Threshold){<br>
+            leds[0] = CRGB(0,255,0);<br>
+            ...<br>
+            leds[199] = CRGB(0,255,0);<br>
+            FastLED.show();<br>
+        } else {<br>
+            leds[0] = CRGB(255,0,0);<br>
+            ...<br>
+            leds[199] = CRGB(255,0,0);<br>
+            FastLED.show();<br>
+        }<br>
+        delay(100);<br>
+    }<br>
+    </h1>
+</body>
+</html>
